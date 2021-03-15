@@ -5,16 +5,19 @@ import {
     StyleSheet,
     TextInput,
     FlatList,
-    Alert
+    Alert,
+    Image,
+    Button
 } from 'react-native';
 
 import BtnPost from '../components/Buttons/AddButton';
 import BtnAlert from '../components/Buttons/AlertButton';
 import PostItem from '../components/Boxes/PostItem';
-
 import Card from '../components/Boxes/Card';
 
-const Initial = () => {
+import ScreensName from '../constants/screens';
+
+const InitialScreen = props => {
     const [idPost, changeId] = useState(0);
     const [posts, changeText] = useState([]);
     const [title, changeTitle] = useState('');
@@ -24,14 +27,8 @@ const Initial = () => {
         id: idPost,
         post: title
       }
-      changeText(posts=>[...posts, obj]);
+      changeText(posts=>[obj, ...posts]);
       changeTitle('');
-    }
-  
-    const removePost = postId => {
-      changeText(currentPosts => {
-        return currentPosts.filter((post) => post.id !== postId);
-      })
     }
 
     const checkAlert = () => {
@@ -41,38 +38,59 @@ const Initial = () => {
         [{text: 'OK', onPress: changeTitle('')}]
       )
     }
+
     return (
-        <>
-        <Text style={styles.sectionTitle}>Add post</Text>
-        <View style={styles.body}>
-            <TextInput
-             placeholder="Add Title to post"
-             style={styles.textInput}
-             onChangeText={text=>{changeTitle(text)}}
-             clearButtonMode="always"
-             value={title}
-            />
-            <BtnPost title="Add Post" line="dfs" createPost={addPost} />
-            <BtnAlert title="Alert" line="dfs" createPost={checkAlert} />
-            {/* <Card id="1" content="fdfsd"/> */}
-        </View>
-        <View style={styles.listView}>
-            <FlatList
-             data={posts}
-             renderItem={({item}) =>{
-               return(
-                <PostItem item={item} onDelete={removePost}/>
-               )
-              }}
+        <View>
+          <View style={styles.initialView}>
+            <Text style={styles.sectionTitle}>Route ID: {props.route.params.ID}</Text>
+            <Image
+            style={styles.image}
+            source={require('../assets/wp4371791.jpg')}
             />
           </View>
-        </>
+          <View style={styles.body}>
+              <TextInput
+              placeholder="Add Title to post"
+              style={styles.textInput}
+              onChangeText={text=>{changeTitle(text)}}
+              clearButtonMode="always"
+              value={title}
+              />
+              <BtnPost title="Add Post" line="dfs" createPost={addPost} />
+              <BtnAlert title="Alert" line="dfs" createPost={checkAlert} />
+              {/* <Card id="1" content="fdfsd"/> */}
+              <Button
+               title="Posts page"
+               onPress={()=>props.navigation.navigate('Posts')}
+              />
+          </View>
+          <View style={styles.listView}>
+              <FlatList
+              data={posts}
+              renderItem={({item}) =>{
+                return(
+                  <PostItem key={item.id} item={item} />
+                )
+                }}
+              />
+          </View>
+        </View>
     )
 };
 const styles = StyleSheet.create({
+    initialView: {
+      alignItems: 'center'
+    },
     body: {
-        alignItems: 'center',
-        marginTop: 20
+      alignItems: 'center',
+      marginTop: 20
+    },
+    image: {
+      height: 220,
+      width: '70%',
+      justifyContent: 'center',
+      borderWidth: 4,
+      borderRadius: 180,
     },
     textInput: {
       width: 275,
@@ -92,4 +110,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Initial;
+export default InitialScreen;

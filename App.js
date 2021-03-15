@@ -9,7 +9,7 @@ import {
   Button,
   TextInput,
   FlatList,
-  TouchableOpacity
+  TouchableOpacity,
 } from 'react-native';
 
 import {
@@ -18,36 +18,35 @@ import {
   DebugInstructions,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
 
-import Initial from './screens/initialScreen';
+import InitialScreen from './screens/initialScreen';
 import Header from './components/Header';
 import ScreensName from './constants/screens';
-import PostScreens from './screens/PostScreen';
+import PostScreen from './screens/PostScreen';
+
+import NavigatorStack from './navigation/NavigatorStack';
+import NavigatorDrawer from './navigation/NavigatorDrawer';
+
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const Stack = createStackNavigator();
 
 const App = () => {
-  const [screenNum, setScreen] = useState('');
+  const [screenName, setScreen] = useState(ScreensName.INITIAL);
+  const [loaded, setLoaded] = useState(false);
+  useEffect(() => {
+    (async () => {
+      await Ionicons.loadFont();
+      setLoaded(true);
+    })();
+  }, []);
 
-  const changeScreenState = screen => {
-    setScreen(screen);
-  }
-
-  let content = <Initial />;
-  if(screenNum == ScreensName.POST){
-    content = <PostScreens />
-  }
   return (
-    <>
-    <Header title="Hello World!"/>   
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
-          {content}
-        </ScrollView>
-    </>
+    <NavigationContainer>
+      <NavigatorDrawer />
+    </NavigationContainer>
   );
 };
 

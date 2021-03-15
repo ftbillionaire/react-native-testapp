@@ -5,6 +5,7 @@ import {
     StyleSheet,
 } from 'react-native';
 
+
 const Header = props => {
     return(
         <View style={styles.headerView}>

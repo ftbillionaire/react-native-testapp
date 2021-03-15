@@ -14,6 +14,7 @@ const styles = StyleSheet.create({
     cardView: {
         width: "100%",
         alignItems: "center",
+        marginTop: 10,
         backgroundColor: "#fff",
         flexDirection: "row",
         justifyContent: "space-between",
