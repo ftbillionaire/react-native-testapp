@@ -1,40 +1,26 @@
 import React, {useState, useEffect} from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-  Button,
-  TextInput,
-  FlatList,
-  TouchableOpacity,
-} from 'react-native';
-
-import {
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import {StyleSheet} from 'react-native';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
-import InitialScreen from './screens/initialScreen';
-import Header from './components/Header';
-import ScreensName from './constants/screens';
-import PostScreen from './screens/PostScreen';
+import {createStore, combineReducers} from 'redux';
+import {Provider} from 'react-redux';
 
-import NavigatorStack from './navigation/NavigatorStack';
+import ScreensName from './constants/screens';
 import NavigatorDrawer from './navigation/NavigatorDrawer';
+import postsReducer from './store/reducers/posts';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
+const rootReducer = combineReducers({
+  posts: postsReducer,
+});
+
+const store = createStore(rootReducer);
 const Stack = createStackNavigator();
 
 const App = () => {
-  const [screenName, setScreen] = useState(ScreensName.INITIAL);
   const [loaded, setLoaded] = useState(false);
   useEffect(() => {
     (async () => {
@@ -44,9 +30,11 @@ const App = () => {
   }, []);
 
   return (
-    <NavigationContainer>
-      <NavigatorDrawer />
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <NavigatorDrawer />
+      </NavigationContainer>
+    </Provider>
   );
 };
 

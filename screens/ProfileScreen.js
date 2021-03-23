@@ -5,7 +5,10 @@ const ProfileScreen = ({navigation}) => {
   return (
     <View style={styles.profileDetail}>
       <Text style={styles.titleView}>Profile</Text>
-      <Button title="Posts page" onPress={() => navigation.navigate('Posts')} />
+      <Button
+        title="Posts page"
+        onPress={() => navigation.navigate('Posts', {userId: '1020'})}
+      />
     </View>
   );
 };

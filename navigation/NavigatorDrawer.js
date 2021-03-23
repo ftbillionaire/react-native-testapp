@@ -23,27 +23,27 @@ export default function NavigatorDrawer() {
         name="Profile"
         component={NavigatorTab}
         options={{
-            drawerIcon: ({focused, size}) => (
-                <Ionicons
-                    name={focused ? "home" : "home-outline"}
-                    size={size}
-                    color="#fff"
-                />
-            )}
-        }
+          drawerIcon: ({focused, size}) => (
+            <Ionicons
+              name={focused ? 'home' : 'home-outline'}
+              size={size}
+              color="#fff"
+            />
+          ),
+        }}
       />
-      <Drawer.Screen 
-       name="Settings" 
-       component={SettingsStack} 
-       options={{
-           drawerIcon: ({focused, size}) => (
-               <Ionicons
-                name={focused ? "settings" : "settings-outline"}
-                size={size}
-                color="#fff"
-               />
-           )
-       }}
+      <Drawer.Screen
+        name="Settings"
+        component={SettingsStack}
+        options={{
+          drawerIcon: ({focused, size}) => (
+            <Ionicons
+              name={focused ? 'settings' : 'settings-outline'}
+              size={size}
+              color="#fff"
+            />
+          ),
+        }}
       />
     </Drawer.Navigator>
   );

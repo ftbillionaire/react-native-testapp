@@ -7,6 +7,7 @@ import SettingsScreen from '../screens/SettingsScreen';
 
 import PostScreen from '../screens/PostScreen';
 import SearchScreen from '../screens/SearchScreen';
+import PostDetail from '../screens/PostDetail';
 
 const Stack = createStackNavigator();
 
@@ -40,6 +41,20 @@ function HomeStack() {
           },
         })}
       />
+      <Stack.Screen
+        name="Post"
+        component={PostDetail}
+        options={(props) => ({
+          title: props.route.params.title,
+          headerStyle: {
+            backgroundColor: '#F58D77',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        })}
+      />
     </Stack.Navigator>
   );
 }
@@ -47,18 +62,18 @@ function HomeStack() {
 function SearchStack() {
   return (
     <Stack.Navigator>
-      <Stack.Screen 
-       name="Search" 
-       component={SearchScreen} 
-       options={{
-         headerStyle: {
-           backgroundColor: "#F58D77"
-         },
-         headerTintColor: "#fff",
-         headerTitleStyle: {
-           fontWeight: "bold"
-         }
-       }}
+      <Stack.Screen
+        name="Search"
+        component={SearchScreen}
+        options={{
+          headerStyle: {
+            backgroundColor: '#F58D77',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }}
       />
     </Stack.Navigator>
   );

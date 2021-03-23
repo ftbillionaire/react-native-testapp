@@ -1,4 +1,4 @@
 export default ScreensName = {
-    INITIAL: 'initial',
-    POST: 'post'
-}
+  INITIAL: 'initial',
+  POST: 'post',
+};

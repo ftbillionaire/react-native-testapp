@@ -25,6 +25,7 @@ export default function NavigatorTab() {
             let iconName = focused ? 'home' : 'home-outline';
             return <Ionicons name={iconName} color={color} size={size} />;
           },
+          tabBarBadge: 1,
         }}
       />
       <Tab.Screen
